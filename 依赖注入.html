@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>依赖注入</title>
+        <meta charset="utf-8">
+    </head>
+    <body ng-app="myApp">
+      <div ng-controller="myTest">
+          <div ng-repeat="value in person">
+              姓名:{{person.name}}<br>年龄:{{person.age}}<br>性别:{{person.sex}}<br><br>
+          </div>
+      </div>
+      <script type="text/javascript" src="js/angular.min.js"></script>
+      <script type="text/javascript">
+        angular.module("myApp",[]).factory("myData",function(){
+            return {//返回的就是dactory
+                name:"Tom",
+                age:19,
+                sex:"男",
+                getName:function(){
+                    return this.name
+                },
+                setName:function(name){
+                    this.name=name;
+                }
+            }
+        }).controller("myTest",function($scope,myData){
+            $scope.person=myData;
+            $scope.person.setName("Jarry");
+        });
+      </script>
+    </body>
+</html>
